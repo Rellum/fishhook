@@ -1,0 +1,10 @@
+-   id: experimental
+    name: experimental
+    description: Do not use. For testing only.
+    entry: experimental
+    language: golang
+-   id: forbidden-words
+    name: forbidden words
+    description: prevents checking in lines containing forbidden terms (e.g. debug statements).
+    entry: forbidden-words
+    language: golang
