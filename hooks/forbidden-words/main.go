@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"gopkg.in/yaml.v2"
 	"io"
 	"os"
 )
@@ -20,17 +19,7 @@ func main() {
 }
 
 func run(args []string, stdout io.Writer) error {
-	argsY, err := yaml.Marshal(args)
-	if err != nil {
-		return err
-	}
-	fmt.Fprintf(stdout, "Args: %+v\n", string(argsY))
-
-	envY, err := yaml.Marshal(os.Environ())
-	if err != nil {
-		return err
-	}
-	fmt.Fprintf(stdout, "Env: %+v\n", string(envY))
+	// TODO: Implement me!
 
 	return nil
 }
