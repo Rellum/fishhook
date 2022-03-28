@@ -34,5 +34,13 @@ func run(args []string, stdout, stderr io.Writer) error {
 		}
 	}
 
-	return forbidden.CheckFiles(args[2:], forbiddenWords)
+	var files []string
+	for i := range args[2:] {
+		if strings.Contains(args[2+i], ".pre-commit-config.yaml") {
+			continue
+		}
+		files = append(files, args[2+i])
+	}
+
+	return forbidden.CheckFiles(files, forbiddenWords)
 }
