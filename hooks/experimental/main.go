@@ -6,6 +6,7 @@ import (
 	"gopkg.in/yaml.v2"
 	"io"
 	"os"
+	"strings"
 )
 
 const (
@@ -21,16 +22,31 @@ func main() {
 }
 
 func run(args []string, stdout, stderr io.Writer) error {
+	fmt.Fprint(stdout, "This is stdout\n")
+	fmt.Fprint(stderr, "This is stderr\n")
+
 	argsY, err := yaml.Marshal(args)
 	if err != nil {
 		return err
 	}
 
-	fmt.Fprint(stdout, "This is stdout\n")
-	fmt.Fprint(stderr, "This is stderr\n")
-
 	w := io.MultiWriter(stdout, os.Stderr)
 	fmt.Fprintf(w, "Args: %+v\n", string(argsY))
+
+	var parsedFirstArg []string
+	if len(args) > 0 {
+		parsedFirstArg = strings.Split(args[0], " ")
+		for i := range parsedFirstArg {
+			parsedFirstArg[i] = strings.Trim(parsedFirstArg[i], "\"'`")
+		}
+	}
+
+	parsedFirstArgY, err := yaml.Marshal(parsedFirstArg)
+	if err != nil {
+		return err
+	}
+
+	fmt.Fprintf(w, "First arg: %+v\n", string(parsedFirstArgY))
 
 	envY, err := yaml.Marshal(os.Environ())
 	if err != nil {
