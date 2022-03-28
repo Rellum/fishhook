@@ -5,6 +5,11 @@
     language: golang
 -   id: forbidden-words
     name: forbidden words
-    description: prevents checking in lines containing forbidden terms (e.g. debug statements).
+    description: prevents checking in lines containing forbidden words.
     entry: forbidden-words
+    language: golang
+-   id: js-debug-statements
+    name: js debug statements
+    description: prevents checking in lines containing javascript debug statements.
+    entry: js-debug-statements
     language: golang

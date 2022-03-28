@@ -21,7 +21,6 @@ func main() {
 
 func run(args []string, stdout, stderr io.Writer) error {
 	return forbidden.CheckFiles(args, []string{
-		"console.log(",
-		"debugger",
+		"nocommit",
 	})
 }
