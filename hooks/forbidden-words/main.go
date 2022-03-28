@@ -1,10 +1,12 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"github.com/Rellum/fishhook/pkg/forbidden"
 	"io"
 	"os"
+	"strings"
 )
 
 const (
@@ -20,8 +22,17 @@ func main() {
 }
 
 func run(args []string, stdout, stderr io.Writer) error {
-	return forbidden.CheckFiles(args, []string{
-		"console.log(",
-		"debugger",
-	})
+	if len(args) < 3 { // /path/to/tool "forbidden word list" dir/file.go
+		return errors.New("no forbidden words passed")
+	}
+
+	var forbiddenWords []string
+	if len(args) > 1 {
+		forbiddenWords = strings.Split(args[1], " ")
+		for i := range forbiddenWords {
+			forbiddenWords[i] = strings.Trim(forbiddenWords[i], "\"'`")
+		}
+	}
+
+	return forbidden.CheckFiles(args, forbiddenWords)
 }
