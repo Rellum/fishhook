@@ -10,7 +10,9 @@ import (
 
 func CheckFiles(files, forbidden []string) error {
 	for i := range files {
-		checkFile(files[i], forbidden)
+		if err := checkFile(files[i], forbidden); err != nil {
+			return err
+		}
 	}
 
 	return nil
