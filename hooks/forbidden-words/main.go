@@ -34,5 +34,5 @@ func run(args []string, stdout, stderr io.Writer) error {
 		}
 	}
 
-	return forbidden.CheckFiles(args, forbiddenWords)
+	return forbidden.CheckFiles(args[2:], forbiddenWords)
 }

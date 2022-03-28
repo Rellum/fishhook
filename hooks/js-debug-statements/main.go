@@ -20,7 +20,7 @@ func main() {
 }
 
 func run(args []string, stdout, stderr io.Writer) error {
-	return forbidden.CheckFiles(args, []string{
+	return forbidden.CheckFiles(args[1:], []string{
 		"console.log(",
 		"debugger",
 	})
