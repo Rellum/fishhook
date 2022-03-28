@@ -34,8 +34,8 @@ func run(args []string, stdout, stderr io.Writer) error {
 	fmt.Fprintf(w, "Args: %+v\n", string(argsY))
 
 	var parsedFirstArg []string
-	if len(args) > 0 {
-		parsedFirstArg = strings.Split(args[0], " ")
+	if len(args) > 1 {
+		parsedFirstArg = strings.Split(args[1], " ")
 		for i := range parsedFirstArg {
 			parsedFirstArg[i] = strings.Trim(parsedFirstArg[i], "\"'`")
 		}
