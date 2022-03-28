@@ -2,7 +2,6 @@ package forbidden
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -27,13 +26,11 @@ func checkFile(name string, forbidden []string) error {
 
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
-	fmt.Println("forbidden", forbidden)
 
 	var i int
 	for scanner.Scan() {
 		i++
 		text := scanner.Text()
-		fmt.Println(">>>", i, text)
 
 		for j := range forbidden {
 			idx := strings.Index(text, forbidden[j])
@@ -43,5 +40,5 @@ func checkFile(name string, forbidden []string) error {
 		}
 	}
 
-	return errors.New("test hook")
+	return nil
 }
